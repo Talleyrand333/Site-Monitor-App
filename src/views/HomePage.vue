@@ -2,30 +2,76 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title>Blank</ion-title>
+        <ion-title>My Monitor</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">Blank</ion-title>
+          <ion-title size="large">My Monitor</ion-title>
         </ion-toolbar>
       </ion-header>
 
       <div id="container">
-        <strong>Ready to create an app?</strong>
-        <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+        <div>
+          <strong>Ready to Start Monitoring?</strong> <br>
+        <ion-button router-link ="/register" fill="outline" color="secondary" shape="round" >
+          Register
+        </ion-button>
+        <ion-button router-link="/login"  color="secondary" fill="outline" shape="round">
+          Login
+        </ion-button>
+        </div>
+        <div id = "image_div">
+          <!-- <ion-img
+          src="/src/assets/site_monitor_background.png"
+        ></ion-img> -->
+        </div>
+        
+        
       </div>
     </ion-content>
   </ion-page>
 </template>
 
-<script setup lang="ts">
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+<script >
+import { IonIcon,IonContent,IonButton, IonHeader, IonPage,IonImg, IonTitle, IonToolbar } from '@ionic/vue';
+
+
+export default {
+    'name': 'HomePage',
+    components:{
+        IonIcon,
+        IonContent,
+         IonHeader,
+          IonPage,
+        IonButton,
+           IonTitle,
+            IonToolbar,  
+            IonImg
+    },
+    
+    
+    }
 </script>
 
 <style scoped>
+
+
+#image_div {
+  
+  width: 70%; /* Set the width of the div to 70% of the screen width */
+  height: 60vh; /* Set the height of the div to 100% of the viewport height */
+  background-image: url("/src/assets/site_monitor_background.png"); /* Set the background image */
+  background-size: cover; /* Cover the entire div with the background image */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent the background image from repeating */
+  margin: 0 auto; /* Center the container horizontally */
+  text-align: center;
+}
+
+
 #container {
   text-align: center;
   

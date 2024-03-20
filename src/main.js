@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router';
+import  makeApiCall  from './api'
 
 import { IonicVue } from '@ionic/vue';
 
@@ -28,5 +29,7 @@ const app = createApp(App)
   .use(router);
   
 router.isReady().then(() => {
+    app.provide('makeApiCall', makeApiCall);
   app.mount('#app');
+
 });
