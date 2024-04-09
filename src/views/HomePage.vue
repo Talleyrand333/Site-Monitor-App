@@ -2,26 +2,30 @@
   <ion-page>
     <ion-header :translucent="true">
       <ion-toolbar>
-        <ion-title>My Monitor</ion-title>
+        <ion-title>Site Diver</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
         <ion-toolbar>
-          <ion-title size="large">My Monitor</ion-title>
+          <ion-title size="large">Site Diver</ion-title>
         </ion-toolbar>
       </ion-header>
 
       <div id="container">
         <div>
-          <strong>Ready to Start Monitoring?</strong> <br>
+          <strong>Ready to Start Monitoring  {{userdata.user_id}}?</strong> <br>
         <ion-button router-link ="/register" fill="outline" color="secondary" shape="round" >
           Register
         </ion-button>
         <ion-button router-link="/login"  color="secondary" fill="outline" shape="round">
           Login
         </ion-button>
+
+
+
+
         </div>
         <div id = "image_div">
           <!-- <ion-img
@@ -35,28 +39,16 @@
   </ion-page>
 </template>
 
-<script >
+<script setup >
 import { IonIcon,IonContent,IonButton, IonHeader, IonPage,IonImg, IonTitle, IonToolbar } from '@ionic/vue';
 
+import { userData } from "@/stores/userData"
 
-export default {
-    'name': 'HomePage',
-    components:{
-        IonIcon,
-        IonContent,
-         IonHeader,
-          IonPage,
-        IonButton,
-           IonTitle,
-            IonToolbar,  
-            IonImg
-    },
-    
-    
-    }
+const  userdata = userData()
 </script>
 
 <style scoped>
+
 
 
 #image_div {
