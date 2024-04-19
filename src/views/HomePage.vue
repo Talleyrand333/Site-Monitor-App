@@ -15,7 +15,7 @@
 
       <div id="container">
         <div>
-          <strong>Ready to Start Monitoring  {{userdata.user_id}}?</strong> <br>
+          <strong>Ready to Start Monitoring ?</strong> <br>
         <ion-button router-link ="/register" fill="outline" color="secondary" shape="round" >
           Register
         </ion-button>
@@ -42,9 +42,7 @@
 <script setup >
 import { IonIcon,IonContent,IonButton, IonHeader, IonPage,IonImg, IonTitle, IonToolbar } from '@ionic/vue';
 
-import { userData } from "@/stores/userData"
 
-const  userdata = userData()
 </script>
 
 <style scoped>

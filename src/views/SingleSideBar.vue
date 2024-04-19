@@ -1,5 +1,4 @@
 <template>
-
         <ion-content class="ion-padding">
         <ion-card>
              <div style="display: flex; align-items: center;">
@@ -7,8 +6,8 @@
                 <img src="/src/assets/blank_profile.png" />
               </ion-thumbnail>
             <ion-card-header>
-              <ion-card-title>User Full Name</ion-card-title>
-              <ion-card-subtitle>User Email Address</ion-card-subtitle>
+              <ion-card-title>{{userdata.full_name}}</ion-card-title>
+              <ion-card-subtitle>{{userdata.email_address}}</ion-card-subtitle>
             </ion-card-header>
             </div>
           </ion-card>
@@ -16,11 +15,13 @@
             <div>
             <ion-item :button="true" router-link = '/home'>
             <ion-icon slot="start" :icon = "globeOutline" ></ion-icon>
+            <ion-badge slot="end">{{userdata.sites}}</ion-badge>
              <ion-label>Registered Sites</ion-label>
             </ion-item>
              </div>
             <ion-item :button="true" router-link = '/home'>
             <ion-icon slot="start" :icon = "serverOutline" ></ion-icon>
+            <ion-badge slot="end">{{userdata.servers}}</ion-badge>
               <ion-label  >Registered Servers</ion-label>
             </ion-item>
 
@@ -41,14 +42,15 @@
 
         </ion-list>
    </ion-content>
-
 </template>
 
 <script setup lang="js">
-
+  import { userData } from "@/stores/userData"
   import { IonPage,IonThumbnail,IonCard, IonCardContent, IonCardHeader, IonCardSubtitle,
-  IonCardTitle , IonTitle,IonIcon, IonToolbar, IonMenu, IonMenuButton,
+  IonCardTitle ,IonBadge, IonTitle,IonIcon, IonToolbar, IonMenu, IonMenuButton,
   IonHeader,IonButtons, IonContent, IonList, IonItem, IonLabel, IonInput, IonButton } from "@ionic/vue";
   import { serverOutline,personOutline,globeOutline,analyticsOutline,callOutline } from 'ionicons/icons';
-
+    const userdata = userData()
   </script>
+
+

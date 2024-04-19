@@ -9,6 +9,7 @@ export default {
       const loading = ref(true); // Optional loading state
 
       try {
+
         const axiosResponse = await axios({
           method,
           url,
@@ -16,13 +17,15 @@ export default {
           headers,
         });
         response.value = axiosResponse.data;
+
+         let api_response = JSON.parse(response._value['message'])
+         return { 'response':api_response,'error':null}; // Return all values for flexibility
       } catch (err) {
-        error.value = err.message;
-      } finally {
-        loading.value = false; // Optional loading state
+        error.value = err;
+        return { 'response':null,'error':error.value}; // Return all values for flexibility
       }
 
-      return { response, error, loading }; // Return all values for flexibility
+
     },
   },
 };

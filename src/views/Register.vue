@@ -25,8 +25,12 @@
             </ion-item>
             <ion-item>
                 <ion-icon slot="start" :icon="lockClosedOutline" aria-hidden="true"></ion-icon>
-              <ion-input minlength="10" label="Password" v-model="password" type="password" required>
-                
+              <ion-input minlength="10" label="Password" v-model="password" :type="showPassword ? 'text' : 'password'" required>
+               <ion-icon
+                 slot="end"
+              :icon="showPassword ? eyeOutline : eyeOffOutline "
+              @click="togglePasswordVisibility"
+            ></ion-icon>
             </ion-input>
             </ion-item>
             
@@ -34,15 +38,20 @@
           <ion-button type="submit" expand="block" :disabled="!canSubmit || submitting">Submit</ion-button>
           <ion-progress-bar v-if="submitting" type="indeterminate"></ion-progress-bar>
         </form>
+        <div class="login-button">
+            
+            <RouterLink to="/login">Go to Login Page</RouterLink>
+          </div>
       </ion-content>
     </ion-page>
   </template>
   <script setup lang="js">
   import { ref,defineComponent, computed,inject } from "vue";
   import { IonPage,IonProgressBar,alertController, IonTitle,IonIcon, IonToolbar, IonBackButton, IonHeader, IonContent, IonList, IonItem, IonLabel, IonInput, IonButton } from "@ionic/vue";
-  import { lockClosedOutline,callOutline,mailOutline,personOutline } from 'ionicons/icons';
+  import { lockClosedOutline,callOutline,mailOutline,personOutline,eyeOutline, eyeOffOutline } from 'ionicons/icons';
   const makeApiCall = inject('makeApiCall');
   const fullName = ref("");
+  const showPassword = ref(false);
    // Inject the provided function
   const phoneNumber = ref("");
   const password = ref("");
@@ -80,19 +89,24 @@
     email.value = "";
     submitting.value = false
 
-
   };
-
-
 
   const presentAlert = async (api_response) => {
 
-        status = JSON.parse(api_response.response._value['message'])['status']
+        status = api_response.response.status
 
         if(status==200){
             const alert = await alertController.create({
               subHeader: 'User Created',
               message: 'User Created Successfully',
+              buttons: ['OK'],
+            });
+        await alert.present();
+        }
+        else if(status==400){
+            const alert = await alertController.create({
+              subHeader: 'User Exists',
+              message: 'User Already exists, Please login',
               buttons: ['OK'],
             });
         await alert.present();
@@ -105,8 +119,10 @@
             });
         await alert.present();
         }
-
-
       }
+
+    const togglePasswordVisibility = () => {
+      showPassword.value = !showPassword.value;
+    };
   </script>
   

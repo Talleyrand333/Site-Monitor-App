@@ -1,14 +1,14 @@
 <template>
-<ion-page>
-  <ion-menu content-id="main-content">
+
+<ion-page id="user-page">
+
+  <ion-menu content-id="main-content" >
     <ion-header>
       <ion-toolbar>
-
         <ion-title>Menu</ion-title>
-
       </ion-toolbar>
     </ion-header>
-    <SingleSideBar>
+    <SingleSideBar >
     </SingleSideBar>
   </ion-menu>
 
@@ -23,14 +23,14 @@
     </ion-header>
     <ion-content>
       <div style="display: flex; flex-wrap: wrap;">
-        <ion-card color="primary">
+        <ion-card router-link = "/site" button = "true" color="primary">
           <ion-card-header>
             <ion-card-title>Sites</ion-card-title>
             <ion-card-subtitle>Manage your sites</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>Perform actions like adding new sites to be monitored</ion-card-content>
         </ion-card>
-        <ion-card color="primary">
+        <ion-card router-link = "/site" button = "true"  color="primary">
           <ion-card-header>
             <ion-card-title>Servers</ion-card-title>
             <ion-card-subtitle>Manage your servers</ion-card-subtitle>
@@ -50,11 +50,24 @@
 
 
 <script setup>
+import { ref,defineComponent,onMounted, computed,inject } from "vue";
+import { userData } from "@/stores/userData"
 import { IonCard, IonButtons,IonMenuButton, IonLabel, IonList, IonItem, IonMenu, IonPage, IonContent,
 IonHeader, IonToolbar, IonTitle, IonCardContent, IonCardHeader, IonCardSubtitle,
 IonCardTitle, IonMenuToggle } from '@ionic/vue';
 import SingleSideBar from '../views/SingleSideBar.vue'
 import BottomBar from '../views/BottomBar.vue'
+const userdata = userData()
+onMounted(() => {
+  userdata.fetchData()
+})
 
 </script>
 
+
+<style scoped>
+.menu-open {
+  visibility: visible !important;
+  transform: translateX(0) !important;
+}
+</style>
